@@ -1,0 +1,27 @@
+mingnuo_carlike:    
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50
+    
+  wheel_rb_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: wheel_rb_joint
+    # pid: {p: 100.0, i: 0.01, d: 0.0}
+  wheel_lb_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: wheel_lb_joint
+    # pid: {p: 100.0, i: 0.01, d: 0.0}
+  wheel_steering_position_controller:
+    type: position_controllers/JointPositionController
+    joint: wheel_steering_joint
+    # pid: {p: 100.0, i: 0.0, d: 0.0}
+  wheel_f_velocity_controller:
+    type: velocity_controllers/JointVelocityController
+    joint: wheel_f_joint
+    # pid: {p: 100.0, i: 0.01, d: 0.0}
+
+mingnuo_carlike/gazebo_ros_control/pid_gains:
+  wheel_rb_joint: {p: 100.0, i: 0.008, d: 0.01}
+  wheel_lb_joint: {p: 100.0, i: 0.008, d: 0.01}
+  wheel_steering_joint: {p: 100.0, i: 0.008, d: 0.01}
+  wheel_f_joint: {p: 100.0, i: 0.008, d: 0.01}

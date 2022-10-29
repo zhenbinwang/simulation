@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="mingnuo" >
+
+       <!-- material -->
+       <xacro:include filename="$(find mingnuo_description)/textures/material.urdf" />
+
+       <!-- common stuff -->
+       <xacro:include filename="$(find mingnuo_description)/urdf/common_gazebo.xacro" />
+
+       <!-- moedl -->
+       <xacro:include filename="$(find mingnuo_description)/urdf/mingnuo_model.xacro" />
+
+       <xacro:arg name="prefix" default=""/>
+       <!-- mingnuo -->
+       <xacro:mingnuo_carlike prefix="$(arg prefix)" joint_limited="true"/>
+
+       <!-- sensor -->
+        <xacro:include filename="$(find mingnuo_description)/urdf/mingnuo_sensor.xacro" />
+
+</robot>

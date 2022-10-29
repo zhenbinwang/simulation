@@ -1,0 +1,385 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+<!--
+    Author: Wang Zhenbin
+    Date: October 25, 2022
+-->
+
+    <xacro:include filename="$(find mingnuo_description)/urdf/mingnuo_transmission.xacro" />
+    <xacro:include filename="$(find mingnuo_description)/urdf/mingnuo_gazebo.xacro" />
+
+    <xacro:macro name="mingnuo_carlike" params="prefix joint_limited
+		  lower_limit:=${-pi}  upper_limit:=${pi}">  
+
+        <link
+            name="${prefix}base_link">
+            <inertial>
+            <origin
+                xyz="0.246282226982174 -1.0152748617003E-17 0.153373604272115"
+                rpy="0 0 0" />
+            <mass
+                value="474.101109714899" />
+            <inertia
+                ixx="40.2717007783528"
+                ixy="-4.46722542781039E-15"
+                ixz="-4.5514236431631"
+                iyy="86.0832631983225"
+                iyz="-1.4416453473168E-15"
+                izz="114.833114130661" />
+            </inertial>
+            <visual>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/base_link.STL" />
+            </geometry>
+            <material
+                name="">
+                <color
+                rgba="0.647058823529412 0.619607843137255 0.584313725490196 1" />
+            </material>
+            </visual>
+            <collision>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/base_link.STL" />
+            </geometry>
+            </collision>
+        </link>
+         <link
+            name="${prefix}wheel_rb_link">
+            <inertial>
+            <origin
+                xyz="-3.08490739566048E-18 1.09476442525376E-47 0"
+                rpy="0 0 0" />
+            <mass
+                value="6.32187600143116" />
+            <inertia
+                ixx="0.03957063310431"
+                ixy="0"
+                ixz="0"
+                iyy="0.03957063310431"
+                iyz="0"
+                izz="0.0706988881167543" />
+            </inertial>
+            <visual>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/wheel_rb_link.STL" />
+            </geometry>
+            <material name="black">
+                <color rgba="0.7 0.5 0 0.5" />
+            </material>
+            </visual>
+            <collision>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/wheel_rb_link.STL" />
+            </geometry>
+            </collision>
+        </link>
+        <joint
+            name="${prefix}wheel_rb_joint"
+            type="continuous">
+            <origin
+            xyz="0 -0.47 0"
+            rpy="1.5708 0 0" />
+            <parent
+            link="base_link" />
+            <child
+            link="wheel_rb_link" />
+            <axis
+            xyz="0 0 -1" />
+        </joint>
+        <link
+            name="${prefix}wheel_lb_link">
+            <inertial>
+            <origin
+                xyz="-3.08490739566048E-18 3.42113882891801E-49 0"
+                rpy="0 0 0" />
+            <mass
+                value="6.32187600143116" />
+            <inertia
+                ixx="0.03957063310431"
+                ixy="0"
+                ixz="0"
+                iyy="0.03957063310431"
+                iyz="0"
+                izz="0.0706988881167543" />
+            </inertial>
+            <visual>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/wheel_lb_link.STL" />
+            </geometry>
+            <material name="black">
+                <color rgba="0.7 0.5 0 0.5" />
+            </material>
+            </visual>
+            <collision>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/wheel_lb_link.STL" />
+            </geometry>
+            </collision>
+        </link>
+        <joint
+            name="${prefix}wheel_lb_joint"
+            type="continuous">
+            <origin
+            xyz="0 0.47 0"
+            rpy="1.5708 0 0" />
+            <parent
+            link="base_link" />
+            <child
+            link="wheel_lb_link" />
+            <axis
+            xyz="0 0 -1" />
+        </joint>
+        <link
+            name="wheel_steering_Link">
+            <inertial>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <mass
+                value="0.00314159265358979" />
+            <inertia
+                ixx="0"
+                ixy="0"
+                ixz="-0"
+                iyy="0"
+                iyz="0"
+                izz="0" />
+            </inertial>
+            <visual>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/wheel_steering_Link.STL" />
+            </geometry>
+            <material
+                name="">
+                <color
+                rgba="0.647058823529412 0.619607843137255 0.584313725490196 1" />
+            </material>
+            </visual>
+            <collision>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/wheel_steering_Link.STL" />
+            </geometry>
+            </collision>
+        </link>
+        <joint
+            name="${prefix}wheel_steering_joint"
+            type="revolute">
+            <origin
+            xyz="0.8 0 0.33"
+            rpy="0 0 0" />
+            <parent
+            link="base_link" />
+            <child
+            link="wheel_steering_Link" />
+            <axis
+            xyz="0 0 -1" />
+            <!-- <limit
+            lower="-3.14"
+            upper="3.14"
+            effort="330.0"
+            velocity="5" />  -->
+            <xacro:if value="${joint_limited}">
+                <limit 
+                lower="${lower_limit}" 
+                upper="${upper_limit}" 
+                effort="330.0" 
+                velocity="3"/>
+            </xacro:if>
+        </joint>
+        <link
+            name="${prefix}wheel_f_link">
+            <inertial>
+            <origin
+                xyz="-1.11022302462516E-16 5.47382212626882E-48 -6.96719031617395E-18"
+                rpy="0 0 0" />
+            <mass
+                value="6.32187600143116" />
+            <inertia
+                ixx="0.03957063310431"
+                ixy="0"
+                ixz="0"
+                iyy="0.03957063310431"
+                iyz="0"
+                izz="0.0706988881167543" />
+            </inertial>
+            <visual>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/wheel_f_link.STL" />
+            </geometry>
+            <material name="black">
+                <color rgba="0.7 0.5 0 0.5" />
+            </material>
+            </visual>
+            <collision>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/wheel_f_link.STL" />
+            </geometry>
+            </collision>
+        </link>
+        <joint
+            name="${prefix}wheel_f_joint"
+            type="continuous">
+            <origin
+            xyz="0 0 -0.33"
+            rpy="1.5708 0 0" />
+            <parent
+            link="wheel_steering_Link" />
+            <child
+            link="wheel_f_link" />
+            <axis
+            xyz="0 0 -1" />
+        </joint>
+        <link
+            name="${prefix}lidar_Link">
+            <inertial>
+            <origin
+                xyz="-0.00407919149409065 -7.61207168051518E-05 -0.0209419301121287"
+                rpy="0 0 0" />
+            <mass
+                value="0.109548484547677" />
+            <inertia
+                ixx="0.000119870499002017"
+                ixy="1.2920665462207E-07"
+                ixz="6.12292711719166E-07"
+                iyy="0.000119795265184309"
+                iyz="-1.21923291378151E-08"
+                izz="0.000196930087454687" />
+            </inertial>
+            <visual>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/lidar_Link.STL" />
+            </geometry>
+            <material name="red">
+                <color rgba="1.0 0.0 0 0.6" />
+            </material>
+            </visual>
+            <collision>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/lidar_Link.STL" />
+            </geometry>
+            </collision>
+        </link>
+        <joint
+            name="${prefix}lidar_joint"
+            type="fixed">
+            <origin
+            xyz="0.05279 0 1.203"
+            rpy="0 -0.017453 0" />
+            <parent
+            link="base_link" />
+            <child
+            link="lidar_Link" />
+            <axis
+            xyz="0 0 0" />
+        </joint>
+       <link
+            name="${prefix}imu_Link">
+            <inertial>
+            <origin
+                xyz="0 1.59243314902663E-05 -0.000303854345826471"
+                rpy="0 0 0" />
+            <mass
+                value="0.0198905556109292" />
+            <inertia
+                ixx="2.5944549067679E-06"
+                ixy="5.77483487649166E-15"
+                ixz="3.02645530507508E-16"
+                iyy="2.37947667987167E-06"
+                iyz="-9.09812249929943E-08"
+                izz="4.11073374602163E-06" />
+            </inertial>
+            <visual>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/imu_Link.STL" />
+            </geometry>
+            <material
+                name="white">
+                <color
+                rgba="0.501960784313725 0.501960784313725 0.501960784313725 1" />
+            </material>
+            </visual>
+            <collision>
+            <origin
+                xyz="0 0 0"
+                rpy="0 0 0" />
+            <geometry>
+                <mesh
+                filename="package://mingnuo_description/meshes/imu_Link.STL" />
+            </geometry>
+            </collision>
+        </link>
+        <joint
+            name="${prefix}imu_joint"
+            type="fixed">
+            <origin
+            xyz="0.21847 0 0.855"
+            rpy="-0.05236 0 0" />
+            <parent
+            link="base_link" />
+            <child
+            link="imu_Link" />
+            <axis
+            xyz="0 0 0" />
+        </joint>
+
+        <xacro:mingnuo_transmission prefix="${prefix}" /> 
+  
+        <xacro:mingnuo_gazebo prefix="${prefix}" />
+    
+
+    </xacro:macro>
+
+</robot>

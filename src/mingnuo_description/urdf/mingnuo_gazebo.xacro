@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="mingnuo_gazebo" params="prefix">
+
+    <gazebo reference="${prefix}base_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wheel_rb_link">
+      <selfCollide>true</selfCollide>
+      <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="${prefix}wheel_lb_link">
+      <selfCollide>true</selfCollide>
+      <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="${prefix}wheel_steering_link">
+      <selfCollide>true</selfCollide>
+    </gazebo>
+    <gazebo reference="${prefix}wheel_f_link">
+      <selfCollide>true</selfCollide>
+      <material>Gazebo/Black</material>
+    </gazebo>
+    <gazebo reference="${prefix}lidar_Link">
+      <selfCollide>true</selfCollide>
+      <material>Gazebo/Red</material>
+    </gazebo>
+    <gazebo reference="${prefix}imu_Link">
+      <selfCollide>true</selfCollide>
+      <material>Gazebo/Blue</material>
+    </gazebo>
+
+  </xacro:macro>
+</robot>

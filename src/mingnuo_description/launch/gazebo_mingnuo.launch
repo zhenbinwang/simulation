@@ -1,0 +1,24 @@
+<launch>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" />
+
+  <param name="robot_description" command="$(find xacro)/xacro '$(find mingnuo_description)/urdf/mingnuo_urdf.xacro'" />
+ 
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" 
+    args=" -urdf -model mingnuo_model -param robot_description" output="screen" />
+ 
+  <rosparam file="$(find mingnuo_description)/config/gazebo_ros_control_params.yaml" command="load"/>
+  
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/mingnuo_carlike" args="joint_state_controller
+              wheel_rb_velocity_controller 
+              wheel_lb_velocity_controller 
+              wheel_steering_position_controller
+              wheel_f_velocity_controller"/>  
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">  
+    <remap from="/joint_states" to="/mingnuo_carlike/joint_states" />  
+  </node>  
+
+  <node name="rviz" pkg="rviz" type="rviz" />
+
+</launch>
